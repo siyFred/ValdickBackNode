@@ -1,7 +1,18 @@
 import express from "express";
+import multer from "multer"
 
-import { listCars, listCar, listBrands, listBrand, addCar, addBrand } from "../data/data.js";
+import { listCars, listCar, listBrands, listBrand, addCar, addBrand, addCarImg, addBrandImg } from "../data/data.js";
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+})
+
+const upload = multer({ storage: storage });
 
 const routes = (app) => {
     app.use(express.json());
@@ -15,6 +26,11 @@ const routes = (app) => {
     // POSTS
     app.post("/data/cars", addCar);
     app.post("/data/brands", addBrand);
+    app.post("/upload/brandsimg", upload.single("img"), addBrandImg);
+
+    // PUTS
+//    app.put("/upload/brands/:id")
+//    app.put("/upload/brands/:id")
 }
 
 export default routes;

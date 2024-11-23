@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 
 import { getDatabase } from "../../server.js";
 import { searchCarDataById, searchBrandDataById, create } from "./utils/datautils.js";
@@ -48,6 +49,38 @@ export async function addBrand(req, res) {
         res.status(500).json("ERRO: Falha na requisição.")
     }
 }
+
+export async function addCarImg(req, res) {
+    const newUpload = req.body;
+    try {
+        const upload = await create(newUpload, "carsimg");
+        res.status(200).json(upload);
+    } catch(erro) {
+        console.error(erro.message);
+        res.status(500).json("ERRO: Falha na requisição.")
+    }
+}
+
+export async function addBrandImg(req, res) {
+    const newUpload = {
+        desc: "",
+        imgUrl: req.file.originalname,
+        alt: ""
+    };
+    try {
+        const upload = await create(newUpload, "brandsimg");
+        const attImg = `uploads/${upload.insertedId}.png`;
+        fs.renameSync(req.file.path, attImg);
+        res.status(200).json(upload);
+    } catch(erro) {
+        console.error(erro.message);
+        res.status(500).json("ERRO: Falha na requisição.")
+    }
+}
+
+// PUT
+
+
 
 //
 // controller end
