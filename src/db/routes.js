@@ -29,8 +29,8 @@ const routes = (app) => {
     app.post("/upload/brandsimg", upload.single("img"), addBrandImg);
 
     // PUTS
-//    app.put("/upload/brands/:id")
-//    app.put("/upload/brands/:id")
+    app.put("/upload/brands/:id")
+    app.put("/upload/brands/:id")
 }
 
 export default routes;

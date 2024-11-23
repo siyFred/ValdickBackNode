@@ -51,9 +51,15 @@ export async function addBrand(req, res) {
 }
 
 export async function addCarImg(req, res) {
-    const newUpload = req.body;
+    const newUpload = {
+        desc: "",
+        imgUrl: req.file.originalname,
+        alt: ""
+    };
     try {
         const upload = await create(newUpload, "carsimg");
+        const attImg = `uploads/${upload.insertedId}.png`;
+        fs.renameSync(req.file.path, attImg);
         res.status(200).json(upload);
     } catch(erro) {
         console.error(erro.message);
@@ -80,7 +86,16 @@ export async function addBrandImg(req, res) {
 
 // PUT
 
-
+export async function attBrand(req, res) {
+    const newBrand = req.body;
+    try {
+        const brand = await create(newBrand, "brands");
+        res.status(200).json(brand);
+    } catch(erro) {
+        console.error(erro.message);
+        res.status(500).json("ERRO: Falha na requisição.")
+    }
+}
 
 //
 // controller end
