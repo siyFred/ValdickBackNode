@@ -1,11 +1,13 @@
 import express from "express";
 
 import { getDatabase } from "../../server.js";
-import { searchCarDataById, searchBrandDataById } from "./utils/datautils.js";
+import { searchCarDataById, searchBrandDataById, create } from "./utils/datautils.js";
 
 //
 // controller
 //
+
+// GET
 
 export async function listCars(req, res) {
     res.status(200).json(await getCarsData());
@@ -22,6 +24,34 @@ export async function listCar(req, res) {
 export async function listBrand(req, res) {
     res.status(200).json(await searchBrandDataById(req));
 }
+
+// POST
+
+export async function addCar(req, res) {
+    const newCar = req.body;
+    try {
+        const car = await create(newCar, "cars");
+        res.status(200).json(car);
+    } catch(erro) {
+        console.error(erro.message);
+        res.status(500).json("ERRO: Falha na requisição.")
+    }
+}
+
+export async function addBrand(req, res) {
+    const newBrand = req.body;
+    try {
+        const brand = await create(newBrand, "brands");
+        res.status(200).json(brand);
+    } catch(erro) {
+        console.error(erro.message);
+        res.status(500).json("ERRO: Falha na requisição.")
+    }
+}
+
+//
+// controller end
+//
 
 //
 // data getter
