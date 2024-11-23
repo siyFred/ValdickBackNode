@@ -4,24 +4,6 @@ import { getDatabase } from "../../server.js";
 import { searchCarDataById, searchBrandDataById } from "./utils/datautils.js";
 
 //
-// data getter
-//
-
-export async function getCarsData() {
-    const db = await getDatabase();
-    const mydb = (await db).db("carrus-di-luxu");
-    const collection = mydb.collection("cars");
-    return collection.find().toArray();
-}
-
-export async function getBrandsData() {
-    const db = await getDatabase();
-    const mydb = (await db).db("carrus-di-luxu");
-    const collection = mydb.collection("brands");
-    return collection.find().toArray();
-}
-
-//
 // controller
 //
 
@@ -39,4 +21,22 @@ export async function listCar(req, res) {
 
 export async function listBrand(req, res) {
     res.status(200).json(await searchBrandDataById(req));
+}
+
+//
+// data getter
+//
+
+export async function getCarsData() {
+    const db = await getDatabase();
+    const mydb = (await db).db("carrus-di-luxu");
+    const collection = mydb.collection("cars");
+    return collection.find().toArray();
+}
+
+export async function getBrandsData() {
+    const db = await getDatabase();
+    const mydb = (await db).db("carrus-di-luxu");
+    const collection = mydb.collection("brands");
+    return collection.find().toArray();
 }
