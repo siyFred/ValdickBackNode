@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer"
 
-import { listCars, listCar, listBrands, listBrand, addCar, addBrand, addCarImg, addBrandImg } from "../data/data.js";
+import { listCars, listCar, listBrands, listBrand, addCar, addBrand, addCarImg, addBrandImg, updateCars, updateBrand } from "../data/data.js";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,8 +29,7 @@ const routes = (app) => {
     app.post("/upload/brandsimg", upload.single("img"), addBrandImg);
 
     // PUTS
-    app.put("/upload/brands/:id")
-    app.put("/upload/brands/:id")
+    app.put("/upload/brands/:id", updateBrand);
 }
 
 export default routes;

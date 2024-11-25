@@ -11,6 +11,7 @@ export function getDatabase() {
 }
 
 const app = express();
+app.use(express.static("uploads"));
 
 routes(app);
 

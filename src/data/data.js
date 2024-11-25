@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 
 import { getDatabase } from "../../server.js";
-import { searchCarDataById, searchBrandDataById, create } from "./utils/datautils.js";
+import { searchCarDataById, searchBrandDataById, create, update } from "./utils/datautils.js";
 
 //
 // controller
@@ -86,10 +86,33 @@ export async function addBrandImg(req, res) {
 
 // PUT
 
-export async function attBrand(req, res) {
-    const newBrand = req.body;
+export async function updateCar(req, res) {
+    const id = req.params.id;
+    const urlImg = `http://localhost:3000/${id}.png`;
+    const attedCar = {
+        desc: req.body.descricao,
+        imgUrl: urlImg,
+        alt: req.body.alt
+    };
     try {
-        const brand = await create(newBrand, "brands");
+        const car = await update(id, attedCar, "cars");
+        res.status(200).json(car);
+    } catch(erro) {
+        console.error(erro.message);
+        res.status(500).json("ERRO: Falha na requisição.")
+    }
+}
+
+export async function updateBrand(req, res) {
+    const id = req.params.id;
+    const urlImg = `http://localhost:3000/${id}.png`;
+    const attedBrand = {
+        desc: req.body.descricao,
+        imgUrl: urlImg,
+        alt: req.body.alt
+    };
+    try {
+        const brand = await update(id, attedBrand, "brands");
         res.status(200).json(brand);
     } catch(erro) {
         console.error(erro.message);
