@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer"
 
-import { listCars, listCar, listBrands, listBrand, addCar, addBrand, addCarImg, addBrandImg, updateCars, updateBrand } from "../data/data.js";
+import { listCars, listCar, listBrands, listBrand, addCar, addBrand, addCarImg, addBrandImg, updateCar, updateBrand } from "../data/data.js";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
