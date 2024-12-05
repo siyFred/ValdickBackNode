@@ -25,7 +25,7 @@
   "contributors": [],
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
-    "start": "node index.js"
+    "vercel-build": "node index.js"
   },
   "dependencies": {
     "": "file:",
