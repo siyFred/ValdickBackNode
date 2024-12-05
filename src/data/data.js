@@ -1,7 +1,7 @@
 import express from "express";
 import fs from "fs";
 
-import { getDatabase } from "../../server.js";
+import { getDatabase } from "../../index.js";
 import { searchCarDataById, searchBrandDataById, create, update } from "./utils/datautils.js";
 
 //

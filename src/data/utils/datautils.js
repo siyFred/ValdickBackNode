@@ -1,7 +1,7 @@
 import express from "express"
 
 import { getCarsData, getBrandsData } from "../data.js";
-import { getDatabase } from "../../../server.js";
+import { getDatabase } from "../../../index.js";
 
 
 // GET
