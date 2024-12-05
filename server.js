@@ -4,7 +4,7 @@ import connectDb from "./src/db/database.js";
 
 import routes from "./src/db/routes.js";
 
-const db = await connectDb(process.env.DATABASE);
+const db = await connectDb(process.env.MONGODB_URI);
 
 export function getDatabase() {
     return db;
